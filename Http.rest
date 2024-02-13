@@ -1,0 +1,44 @@
+@host = http://127.0.0.1:8000
+@react_base_url = {{host}}/api
+@public_header = Content-Type: applicatio/json\r\nAccept: application/json\r\nAccept-Language: en
+@auth_header = Content-Type: application/json\r\nAccept: application/json\r\nAccept-Language: en\r\nAuthorization: Bearer 12|h6n1cLmfx4M9ymGWLv3ySbGx33grPA98eJXT0APa2b9fe396
+#-------PING------------#
+###
+
+//users api's
+
+# @name userLogin
+POST {{react_base_url}}/login HTTP/1.1
+{{public_header}}
+
+{
+    "email":"raghv@gmail.com",
+    "password":"raghu@123"
+}
+
+###
+
+# @name profile
+POST {{react_base_url}}/profile HTTP/1.1
+{{auth_header}}
+###
+
+# @name logout
+POST {{react_base_url}}/logout HTTP/1.1
+{{auth_header}}
+###
+
+# @name updateprofile
+POST {{react_base_url}}/update/1 HTTP/1.1
+{{auth_header}}
+
+{
+    "name":"raghu",
+    "email":"raghv@gmail.com",
+    "password":"raghu@123",
+    "password_confirmation":"raghu@123"
+}
+
+###5
+
+
