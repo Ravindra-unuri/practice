@@ -20,7 +20,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|confirmed|min:8',
         ])) {
-            // Validation passed
+            // Validation passed 
 
             // Check if user with the given email already exists
             if (User::where('email', $request->input('email'))->first()) {
