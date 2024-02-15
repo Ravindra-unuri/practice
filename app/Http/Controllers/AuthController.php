@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use App\Jobs\MailSentJob;
 
 
 
@@ -15,38 +17,49 @@ class AuthController extends Controller
         // $request->validate([
 
         // ]);
-        if ($request->validate([
+        $data = validator::make($request->all(), [
             'name' => 'required|string|min:3|max:25',
             'email' => 'required|email',
             'password' => 'required|string|confirmed|min:8',
-        ])) {
-            // Validation passed 
+        ]);
+        // if ($request->validate([
+        //     'name' => 'required|string|min:3|max:25',
+        //     'email' => 'required|email',
+        //     'password' => 'required|string|confirmed|min:8',
+        // ])) {
+        // Validation passed 
 
-            // Check if user with the given email already exists
-            if (User::where('email', $request->input('email'))->first()) {
-                return response([
-                    'message' => 'Requested User Already Registered',
-                    'status' => 'fail'
-                ], 401);
-            } else {
-                // User with the given email does not exist, create a new user
-                User::create([
-                    'name' => $request->input('name'),
-                    'email' => $request->input('email'),
-                    'password' => $request->input('password'), // Make sure to hash the password
-                ]);
-
-                return response([
-                    'message' => 'User Registered Successfully',
-                    'status' => 'success'
-                ], 200);
-            }
-        } else {
-            // Validation failed
+        // Check if user with the given email already exists
+        if (User::where('email', $request->input('email'))->first()) {
             return response([
-                'message' => 'Validation failed',
+                'message' => 'Requested User Already Registered',
                 'status' => 'fail'
-            ], 422);
+            ], 401);
+        } else {
+            // User with the given email does not exist, create a new user
+            $data=User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'), // Make sure to hash the password
+            ]);
+            // MailSentJob::dispatch($data);
+            // MailSentJob::dispatch($data->toArray())->onQueue('high');
+            dispatch(new MailSentJob($data));
+
+            // dd('ok');
+            // return response([
+            //     'message' => 'User Registered Successfully',
+            //     'status' => 'success'
+            // ], 200);
+            // }
+            // } else {
+            //     // Validation failed
+            //     return response([
+            //         'message' => 'Validation failed',
+            //         'status' => 'fail'
+            //     ], 422);
+            // }
+            // dispatch(new MailSentJob($request));
         }
     }
 
@@ -159,22 +172,23 @@ class AuthController extends Controller
             ], 200);
         }
     }
-    public function logout(){
+    public function logout()
+    {
         auth()->user()->tokens()->delete();
         return response([
             'messsage' => 'User logout successfull',
             'status' => 'success'
         ], 200);
-
     }
 
-    public function profile() {
-        $data= auth()->user();
+    public function profile()
+    {
+        $data = auth()->user();
         return response([
             'messsage' => 'Profile',
             'status' => 'success',
-            'message'=>'Branch Checking',
-            'data'=> $data
+            'message' => 'Branch Checking',
+            'data' => $data
         ], 200);
     }
 }
