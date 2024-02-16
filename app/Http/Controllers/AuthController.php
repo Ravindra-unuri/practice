@@ -44,7 +44,7 @@ class AuthController extends Controller
             ]);
             // MailSentJob::dispatch($data);
             // MailSentJob::dispatch($data->toArray())->onQueue('high');
-            dispatch(new MailSentJob($data));
+            dispatch(new MailSentJob($data,'sendmail','MailSent_worker'));
 
             // dd('ok');
             // return response([
@@ -102,7 +102,7 @@ class AuthController extends Controller
             return response([
                 'message' => 'No user found with the specified name',
                 'status' => 'failed'
-            ], 404);
+            ], 404);                    
         } else {
             $users = User::all();
 
@@ -156,7 +156,7 @@ class AuthController extends Controller
             ], 422);
         }
     }
-    public function delete(Request $request, $id)
+    public function delete($id)
     {
         $user = User::find($id);
         if (!$user) {
