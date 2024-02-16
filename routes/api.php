@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 
 
@@ -31,6 +32,11 @@ Route::post('/delete/{id}', [AuthController::class, 'delete']);
 Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+
 Route::group(['prefix' => '/product'], function () {
     Route::post('/create', [ProductController::class, 'create']);
+});
+
+Route::group(['prefix' => '/order'], function () {
+    Route::post('/makeOrder', [OrderController::class, 'makeOrder']);
 });

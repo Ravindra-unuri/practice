@@ -14,6 +14,12 @@ class product extends Model
      *
      * @var array<int, string>
      */
+
+     public function orders()
+    {
+        return $this->belongsToMany(order::class);
+    }
+
     protected $fillable = [
         'id',
         'product_name',
