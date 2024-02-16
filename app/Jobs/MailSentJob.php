@@ -15,6 +15,7 @@ class MailSentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $data;
+    protected $worker_name= 'MailSent_worker';
 
     /**
      * Create a new job instance.

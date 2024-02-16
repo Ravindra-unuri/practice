@@ -12,7 +12,7 @@ POST {{react_base_url}}/registration HTTP/1.1
 
 { 
     "name":"ravindra",
-    "email":"ravidraunuri@gmail.com",
+    "email":"montujain2618@gmail.com",
     "password":"shivam@gmail.com",
     "password_confirmation":"shivam@gmail.com"
 }

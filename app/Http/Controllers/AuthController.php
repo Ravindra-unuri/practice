@@ -44,7 +44,7 @@ class AuthController extends Controller
             ]);
             // MailSentJob::dispatch($data);
             // MailSentJob::dispatch($data->toArray())->onQueue('high');
-            dispatch(new MailSentJob($data));
+            dispatch(new MailSentJob($data,'sendmail','MailSent_worker'));
 
             // dd('ok');
             // return response([
