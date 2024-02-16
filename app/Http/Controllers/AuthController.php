@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Jobs\MailSentJob;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -14,54 +15,40 @@ class AuthController extends Controller
 
     public function registration(Request $request)
     {
-        // $request->validate([
-
-        // ]);
-        $data = validator::make($request->all(), [
+        $data = Validator::make($request->all(), [
             'name' => 'required|string|min:3|max:25',
             'email' => 'required|email',
             'password' => 'required|string|confirmed|min:8',
         ]);
-        // if ($request->validate([
-        //     'name' => 'required|string|min:3|max:25',
-        //     'email' => 'required|email',
-        //     'password' => 'required|string|confirmed|min:8',
-        // ])) {
-        // Validation passed 
 
-        // Check if user with the given email already exists
-        if (User::where('email', $request->input('email'))->first()) {
+        if ($data->fails()) {
+            return response([
+                'message' => 'Validation failed',
+                'status' => 'fail'
+            ], 422);
+        }
+
+        if (User::where('email', $request->input('email'))->exists()) {
             return response([
                 'message' => 'Requested User Already Registered',
                 'status' => 'fail'
             ], 401);
-        } else {
-            // User with the given email does not exist, create a new user
-            $data=User::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => $request->input('password'), // Make sure to hash the password
-            ]);
-            // MailSentJob::dispatch($data);
-            // MailSentJob::dispatch($data->toArray())->onQueue('high');
-            dispatch(new MailSentJob($data,'sendmail','MailSent_worker'));
-
-            // dd('ok');
-            // return response([
-            //     'message' => 'User Registered Successfully',
-            //     'status' => 'success'
-            // ], 200);
-            // }
-            // } else {
-            //     // Validation failed
-            //     return response([
-            //         'message' => 'Validation failed',
-            //         'status' => 'fail'
-            //     ], 422);
-            // }
-            // dispatch(new MailSentJob($request));
         }
+
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+        ]);
+
+        dispatch(new MailSentJob($user, 'sendmail', 'MailSent_worker'));
+
+        return response([
+            'message' => 'User Registered Successfully',
+            'status' => 'success'
+        ], 200);
     }
+
 
     public function login(Request $request)
     {
@@ -84,6 +71,22 @@ class AuthController extends Controller
         ], 401);
     }
 
+    public function getAll()
+    {
+        //     * Chunk *
+        //     DB::table('users')->orderBy('id')->chunk(4, function ($users) {
+        //         foreach ($users as $user) {
+        //                 echo $user->id.' '.$user->name."\n";
+        //         }
+        //     return false;
+        //     });
+
+
+        //     * Pagination *
+        $users = DB::table('users')->orderBy('id')->cursorPaginate(3);
+        return $users;
+    }
+
     public function get(Request $request)
     {
         $search = $request->input('name');
@@ -102,7 +105,7 @@ class AuthController extends Controller
             return response([
                 'message' => 'No user found with the specified name',
                 'status' => 'failed'
-            ], 404);                    
+            ], 404);
         } else {
             $users = User::all();
 
@@ -120,6 +123,7 @@ class AuthController extends Controller
             ], 404);
         }
     }
+
     public function update(Request $request, $id)
     {
         $validator = $request->validate([
@@ -156,6 +160,7 @@ class AuthController extends Controller
             ], 422);
         }
     }
+
     public function delete($id)
     {
         $user = User::find($id);
@@ -172,6 +177,7 @@ class AuthController extends Controller
             ], 200);
         }
     }
+    
     public function logout()
     {
         auth()->user()->tokens()->delete();

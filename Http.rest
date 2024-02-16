@@ -12,7 +12,7 @@ POST {{react_base_url}}/registration HTTP/1.1
 
 { 
     "name":"ravindra",
-    "email":"montujain2618@gmail.com",
+    "email":"jaylathiya243@gmail.com",
     "password":"shivam@gmail.com",
     "password_confirmation":"shivam@gmail.com"
 }
@@ -39,6 +39,11 @@ POST {{react_base_url}}/logout HTTP/1.1
 {{auth_header}}
 ###
 
+# @name getAllData
+POST {{react_base_url}}/getAll HTTP/1.1
+{{public_header}}
+###
+
 # @name updateprofile
 POST {{react_base_url}}/update/1 HTTP/1.1
 {{auth_header}}
@@ -57,10 +62,18 @@ POST {{react_base_url}}/product/create HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"PEN",
-    "product_price":10.00
+    "product_name":"Book",
+    "product_price":50.00
 }
 
+###
+
+# @name makeOrder
+POST {{react_base_url}}/product/create HTTP/1.1
+{{auth_header}}
+{
+    
+}
 ###
 
 
