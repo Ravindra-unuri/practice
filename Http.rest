@@ -69,11 +69,19 @@ POST {{react_base_url}}/product/create HTTP/1.1
 ###
 
 # @name makeOrder
-POST {{react_base_url}}/product/create HTTP/1.1
+POST {{react_base_url}}/order/makeOrder HTTP/1.1
 {{auth_header}}
+
 {
-    
+    "order_name":"MarkerOrder",
+    "customer_id":28,
+    "product_id":8
 }
+###
+
+# @name orderDetail
+POST {{react_base_url}}/order/detail/1 HTTP/1.1
+{{auth_header}}
 ###
 
 
