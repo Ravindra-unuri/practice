@@ -73,16 +73,16 @@ class AuthController extends Controller
 
     // public function getAll()
     // {
-        //     * Chunk *
-        //     DB::table('users')->orderBy('id')->chunk(4, function ($users) {
-        //         foreach ($users as $user) {
-        //                 echo $user->id.' '.$user->name."\n";
-        //         }
-        //     return false;
-        //     });
+    //     * Chunk *
+    //     DB::table('users')->orderBy('id')->chunk(4, function ($users) {
+    //         foreach ($users as $user) {
+    //                 echo $user->id.' '.$user->name."\n";
+    //         }
+    //     return false;
+    //     });
 
 
-        //     * Pagination *
+    //     * Pagination *
     //     $users = DB::table('users')->orderBy('id')->cursorPaginate(3);
     //     return $users;
     // }

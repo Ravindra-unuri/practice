@@ -61,8 +61,6 @@ class OrderController extends Controller
         }
     }
 
-
-
     public function detail($id)
     {
         $data = DB::table('orders')
@@ -97,36 +95,34 @@ class OrderController extends Controller
             'product_id' => $request->input('product_id')
         ]);
 
-        if($updated > 0)
-        {
+        if ($updated > 0) {
             return response([
-                'status'=>'success',
-                'message'=>'Order updated successfully'
+                'status' => 'success',
+                'message' => 'Order updated successfully'
             ]);
-        }
-        else{
+        } else {
             return response([
-                'status'=>'failed',
-                'message'=>'Unable to update order'
+                'status' => 'failed',
+                'message' => 'Unable to update order'
             ]);
         }
     }
 
-    public function delete($id){
-        $order=order::find($id);
+    public function delete($id)
+    {
+        $order = order::find($id);
 
-        if(!$order){
+        if (!$order) {
             return response([
-                'status'=>'Not found',
-                'message'=>'Requested order not found'
+                'status' => 'Not found',
+                'message' => 'Requested order not found'
             ]);
-        }
-        else{
-            order::where('id',$id)->delete();
+        } else {
+            order::where('id', $id)->delete();
 
             return response([
-                'status'=>'success',
-                'message'=>'Requested order deleted successfully'
+                'status' => 'success',
+                'message' => 'Requested order deleted successfully'
             ]);
         }
     }
