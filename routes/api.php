@@ -39,4 +39,5 @@ Route::group(['prefix' => '/product'], function () {
 
 Route::group(['prefix' => '/order'], function () {
     Route::post('/makeOrder', [OrderController::class, 'makeOrder']);
+    Route::post('/detail/{id}', [OrderController::class, 'detail']);
 });
