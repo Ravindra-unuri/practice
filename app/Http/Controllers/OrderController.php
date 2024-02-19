@@ -88,4 +88,46 @@ class OrderController extends Controller
             ], 404);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        $updated = order::where('id', $id)->update([
+            'order_name' => $request->input('order_name'),
+            'customer_id' => $request->input('customer_id'),
+            'product_id' => $request->input('product_id')
+        ]);
+
+        if($updated > 0)
+        {
+            return response([
+                'status'=>'success',
+                'message'=>'Order updated successfully'
+            ]);
+        }
+        else{
+            return response([
+                'status'=>'failed',
+                'message'=>'Unable to update order'
+            ]);
+        }
+    }
+
+    public function delete($id){
+        $order=order::find($id);
+
+        if(!$order){
+            return response([
+                'status'=>'Not found',
+                'message'=>'Requested order not found'
+            ]);
+        }
+        else{
+            order::where('id',$id)->delete();
+
+            return response([
+                'status'=>'success',
+                'message'=>'Requested order deleted successfully'
+            ]);
+        }
+    }
 }

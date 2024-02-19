@@ -75,6 +75,38 @@ POST {{react_base_url}}/product/create HTTP/1.1
     "product_price":50.00
 }
 
+### 
+
+# @name productGetAll
+POST {{react_base_url}}/product/get HTTP/1.1
+{{auth_header}}
+
+{
+    "product_name":""
+}
+###
+
+# @name productDetail
+POST {{react_base_url}}/product/detail/5 HTTP/1.1
+{{auth_header}}
+
+###
+
+# @name updateProduct
+POST {{react_base_url}}/product/update/12 HTTP/1.1
+{{auth_header}}
+
+{
+    "product_name":"sticker",
+    "product_price":25.00
+}
+
+###
+
+# @name deleteProduct
+POST {{react_base_url}}/product/delete/12 HTTP/1.1
+{{auth_header}}
+
 ###
 
 # @name makeOrder
@@ -93,7 +125,7 @@ POST {{react_base_url}}/order/get HTTP/1.1
 {{auth_header}}
 
 {
-    "order_name":"mar"
+    "order_name":"bo"
 }
 ###
 
@@ -102,4 +134,19 @@ POST {{react_base_url}}/order/detail/4 HTTP/1.1
 {{auth_header}}
 ###
 
+# @name updateOrder
+POST {{react_base_url}}/order/update/8 HTTP/1.1
+{{auth_header}}
 
+{
+    "order_name":"MarkerOrder",
+    "customer_id":28,
+    "product_id":8
+}
+### 
+
+# @name deleteOrder
+POST {{react_base_url}}/order/delete/6 HTTP/1.1
+{{auth_header}}
+
+### 
