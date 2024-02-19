@@ -71,8 +71,8 @@ class AuthController extends Controller
         ], 401);
     }
 
-    public function getAll()
-    {
+    // public function getAll()
+    // {
         //     * Chunk *
         //     DB::table('users')->orderBy('id')->chunk(4, function ($users) {
         //         foreach ($users as $user) {
@@ -83,20 +83,20 @@ class AuthController extends Controller
 
 
         //     * Pagination *
-        $users = DB::table('users')->orderBy('id')->cursorPaginate(3);
-        return $users;
-    }
+    //     $users = DB::table('users')->orderBy('id')->cursorPaginate(3);
+    //     return $users;
+    // }
 
     public function get(Request $request)
     {
         $search = $request->input('name');
 
         if ($search) {
-            $users = User::where('name', 'LIKE', '%' . $search . '%')->get();
+            $users = User::where('name', 'LIKE', '%' . $search . '%')->paginate(3);
 
             if ($users->isNotEmpty()) {
                 return response([
-                    'message' => 'User with the specified name found',
+                    'message' => 'User(s) with the specified name found',
                     'status' => 'success',
                     'data' => $users
                 ], 200);
@@ -107,7 +107,7 @@ class AuthController extends Controller
                 'status' => 'failed'
             ], 404);
         } else {
-            $users = User::all();
+            $users = User::paginate(3);
 
             if ($users->isNotEmpty()) {
                 return response([
@@ -123,6 +123,8 @@ class AuthController extends Controller
             ], 404);
         }
     }
+
+
 
     public function update(Request $request, $id)
     {
@@ -177,7 +179,7 @@ class AuthController extends Controller
             ], 200);
         }
     }
-    
+
     public function logout()
     {
         auth()->user()->tokens()->delete();

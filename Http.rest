@@ -39,9 +39,18 @@ POST {{react_base_url}}/logout HTTP/1.1
 {{auth_header}}
 ###
 
-# @name getAllData
-POST {{react_base_url}}/getAll HTTP/1.1
+# # @name getAllData
+# POST {{react_base_url}}/getAll HTTP/1.1
+# {{public_header}}
+# ###
+
+# @name get
+POST {{react_base_url}}/get HTTP/1.1
 {{public_header}}
+
+{
+    "name":""
+}
 ###
 
 # @name updateprofile
@@ -73,14 +82,23 @@ POST {{react_base_url}}/order/makeOrder HTTP/1.1
 {{auth_header}}
 
 {
-    "order_name":"MarkerOrder",
-    "customer_id":28,
-    "product_id":8
+    "order_name":"BookOrder",
+    "customer_id":23,
+    "product_id":6
+}
+### 
+
+# @name orderGetAll
+POST {{react_base_url}}/order/get HTTP/1.1
+{{auth_header}}
+
+{
+    "order_name":"mar"
 }
 ###
 
 # @name orderDetail
-POST {{react_base_url}}/order/detail/1 HTTP/1.1
+POST {{react_base_url}}/order/detail/4 HTTP/1.1
 {{auth_header}}
 ###
 
