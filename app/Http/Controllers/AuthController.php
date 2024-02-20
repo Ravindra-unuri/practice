@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Jobs\MailSentJob;
 use Illuminate\Support\Facades\DB;
 
-
-
 class AuthController extends Controller
 {
 

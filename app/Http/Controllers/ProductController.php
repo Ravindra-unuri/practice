@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\product;
 use Illuminate\Support\Facades\DB;
 
-
 class ProductController extends Controller
 {
 

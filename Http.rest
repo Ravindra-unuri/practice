@@ -72,7 +72,7 @@ POST {{react_base_url}}/product/create HTTP/1.1
 
 {
     "product_name":"ravindra",
-    "product_price":50.00
+    "product_price":50.25
 }
 
 ### 
