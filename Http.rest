@@ -71,7 +71,7 @@ POST {{react_base_url}}/product/create HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"Book",
+    "product_name":"ravindra",
     "product_price":50.00
 }
 
@@ -82,7 +82,7 @@ POST {{react_base_url}}/product/get HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"jay"
+    "product_name":"ravindra"
 }
 ###
 
@@ -125,7 +125,7 @@ POST {{react_base_url}}/order/get HTTP/1.1
 {{auth_header}}
 
 {
-    "order_name":"bo"
+    "order_name":""
 }
 ###
 

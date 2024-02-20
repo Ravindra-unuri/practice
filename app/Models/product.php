@@ -19,6 +19,16 @@ class product extends Model
         'product_price' => 'integer',
     ];
 
+    public function setProductNameAttribute($value)
+    {
+        $this->attributes['product_name'] = strtoupper($value);
+    }
+
+    public function getProductNameAttribute($value)
+    {
+        return strtolower($value);
+    }
+
     public function orders()
     {
         return $this->belongsToMany(order::class);
