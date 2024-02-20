@@ -35,11 +35,10 @@ class ProductController extends Controller
         $search = $request->input('product_name');
 
         if (!empty($search)) {
-            $data = DB::table('products')
-                ->where('product_name', 'LIKE', '%' . $search . '%')
+            $data = Product::where('product_name', 'LIKE', '%' . $search . '%')
                 ->paginate(3);
         } else {
-            $data = DB::table('products')->paginate(3);
+            $data = Product::paginate(3);
         }
 
         if ($data->isNotEmpty()) {
