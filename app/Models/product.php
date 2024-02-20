@@ -15,7 +15,11 @@ class product extends Model
      * @var array<int, string>
      */
 
-     public function orders()
+    protected $casts = [
+        'product_price' => 'integer',
+    ];
+
+    public function orders()
     {
         return $this->belongsToMany(order::class);
     }
