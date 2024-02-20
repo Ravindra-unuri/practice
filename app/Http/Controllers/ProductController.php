@@ -9,25 +9,32 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+
     public function create(Request $request)
     {
-        // dd($request);
-        if (product::where('product_name', $request->input('product_name'))->first()) {
-            return response([
-                'message' => 'Product Already Exist',
+        $request->validate([
+            'product_name' => 'required|string',
+            'product_price' => 'required|numeric',
+        ]);
+
+        if (Product::where('product_name', $request->input('product_name'))->exists()) {
+            return response()->json([
+                'message' => 'Product already exists',
                 'status' => 'fail'
             ], 401);
-        } else {
-            product::create([
-                'product_name' => $request->input('product_name'),
-                'product_price' => $request->input('product_price'),
-            ]);
-
-            return response([
-                'Status' => 'Success',
-                'Message' => 'Product created successfully'
-            ], 200);
         }
+
+        $product = new Product();
+        $product->product_name = $request->input('product_name');
+        $product->product_price = $request->input('product_price');
+
+        $product->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Product created successfully',
+            'data' => $product
+        ], 200);
     }
 
     public function get(Request $request)
@@ -44,7 +51,7 @@ class ProductController extends Controller
         if ($data->isNotEmpty()) {
             return response()->json([
                 'status' => 'success',
-                'data' => $data
+                'data' => $data,
             ], 200);
         } else {
             return response()->json([
@@ -72,7 +79,6 @@ class ProductController extends Controller
             ], 404);
         }
     }
-
 
     public function update(Request $request, $id)
     {
