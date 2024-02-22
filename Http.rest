@@ -1,7 +1,7 @@
 @host = http://127.0.0.1:8000
 @react_base_url = {{host}}/api
 @public_header = Content-Type: applicatio/json\r\nAccept: application/json\r\nAccept-Language: en
-@auth_header = Content-Type: application/json\r\nAccept: application/json\r\nAccept-Language: en\r\nAuthorization: Bearer 3|uEhtrAfLlZEP74T0D6cHswL5bWJwKXy1rwiWydki832420d2
+@auth_header = Content-Type: application/json\r\nAccept: application/json\r\nAccept-Language: en\r\nAuthorization: Bearer 12|kCNekUwK1eeYdidpwAkTinay2Jxx7Uax7RwzNp0V41371528
 #-------PING------------#
 ###
 
@@ -71,7 +71,7 @@ POST {{react_base_url}}/product/create HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"ravindra",
+    "product_name":"rav",
     "product_price":50.25
 }
 
@@ -82,7 +82,7 @@ POST {{react_base_url}}/product/get HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"ravindra"
+    "product_name":"ra"
 }
 ###
 
@@ -104,7 +104,7 @@ POST {{react_base_url}}/product/update/12 HTTP/1.1
 ###
 
 # @name deleteProduct
-POST {{react_base_url}}/product/delete/12 HTTP/1.1
+POST {{react_base_url}}/product/delete/17 HTTP/1.1
 {{auth_header}}
 
 ###
