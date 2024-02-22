@@ -26,7 +26,7 @@ class product extends Model
 
     public function getProductNameAttribute($value)
     {
-        return strtolower($value);
+        return strtoupper($value);
     }
 
     public function orders()
