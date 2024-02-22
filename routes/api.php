@@ -27,14 +27,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:user']], function () {
-
     Route::post('/get', [AuthController::class, 'get']);
     Route::post('/getAll', [AuthController::class, 'getAll']);
     Route::post('/update/{id}', [AuthController::class, 'update'])->middleware('auth:sanctum');
     Route::post('/delete/{id}', [AuthController::class, 'delete']);
     Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:sanctum');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-
 
     Route::group(['prefix' => '/product'], function () {
         Route::post('/create', [ProductController::class, 'create']);
@@ -51,5 +49,4 @@ Route::group(['middleware' => ['auth:user']], function () {
         Route::post('/update/{id}', [OrderController::class, 'update']);
         Route::post('/delete/{id}', [OrderController::class, 'delete']);
     });
-
 });
