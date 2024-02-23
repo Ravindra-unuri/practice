@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -11,21 +14,8 @@ use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
 
-    public function registration(Request $request)
+    public function registration(RegisterRequest $request)
     {
-        $data = Validator::make($request->all(), [
-            'name' => 'required|string|min:3|max:25',
-            'email' => 'required|email',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
-
-        if ($data->fails()) {
-            return response([
-                'message' => 'Validation failed',
-                'status' => 'fail'
-            ], 422);
-        }
-
         if (User::where('email', $request->input('email'))->exists()) {
             return response([
                 'message' => 'Requested User Already Registered',
@@ -48,12 +38,8 @@ class AuthController extends Controller
     }
 
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
         $user = User::where('email', $request->email)->first();
         if ($user && $request->password == $user->password) {
             $token = $user->createToken($request->email)->plainTextToken;
@@ -124,7 +110,7 @@ class AuthController extends Controller
 
 
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $validator = $request->validate([
             'name' => 'required|string|min:3|max:25',
