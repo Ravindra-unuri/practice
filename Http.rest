@@ -1,7 +1,7 @@
 @host = http://127.0.0.1:8000
 @react_base_url = {{host}}/api
 @public_header = Content-Type: applicatio/json\r\nAccept: application/json\r\nAccept-Language: en
-@auth_header = Content-Type: application/json\r\nAccept: application/json\r\nAccept-Language: en\r\nAuthorization: Bearer 12|kCNekUwK1eeYdidpwAkTinay2Jxx7Uax7RwzNp0V41371528
+@auth_header = Content-Type: application/json\r\nAccept: application/json\r\nAccept-Language: en\r\nAuthorization: Bearer 20|WgipanU2oT2mdesh9zbNKyhmIqfxLQWTb0R8bbI61fe68c13
 #-------PING------------#
 ###
 
@@ -12,7 +12,7 @@ POST {{react_base_url}}/registration HTTP/1.1
 
 { 
     "name":"ravindra",
-    "email":"jaylathiya243@gmail.com",
+    "email":"jaylathiy@gmail.com",
     "password":"shivam@gmail.com",
     "password_confirmation":"shivam@gmail.com"
 }
