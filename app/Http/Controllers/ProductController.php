@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\product;
+use Illuminate\Http\Request;
+use App\Traits\ResponseTrait;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    use ResponseTrait;
 
     public function create(Request $request)
     {
@@ -29,11 +31,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Product created successfully',
-            'data' => $product
-        ], 200);
+        return $this->sendSuccessResponse(__('response.success'), $product);
     }
 
     public function get(Request $request)

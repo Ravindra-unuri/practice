@@ -71,7 +71,7 @@ POST {{react_base_url}}/product/create HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"Note Book",
+    "product_name":"Goa",
     "product_price":50.25
 }
 
