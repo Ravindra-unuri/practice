@@ -4,6 +4,10 @@ namespace App\Traits;
 
 trait ResponseTrait
 {
+    private $status_ok = 200;
+    private $status_conflict = 409;
+
+
     /**
      * Returns http Ok response with 200 status code
      *
@@ -13,12 +17,37 @@ trait ResponseTrait
      *
      * @returns \Illuminate\Http\JsonResponse
      */
-    public function sendSuccessResponse($message, $data = null, $code = 200)
+    
+    public function sendSuccessResponse($message, $data = null, $code = null)
     {
-        return response()->json([
-            'code' => $code,
-            'message' => $message,
-            'data' => $data ?? (object) [],
-        ], $code);
+        return response(
+            [
+                'code' => $code ?? $this->status_ok,
+                'message' => $message,
+                'data' => $data ?? (object) [],
+            ],
+            $this->status_ok
+        );
     }
+
+    /**
+     * Returns http CONFLICT response with 409 status code
+     *
+     * @param string $message
+     * @param array|object  (optional) $data
+     * @param int (optional) $code
+     *
+     */
+    
+     public function sendConflictResponse($message, $data = null, $code = null)
+     {
+         return response(
+             [
+                 'code' => $code ?? $this->status_conflict,
+                 'message' => $message,
+                 'data' => $data ?? (object) [],
+             ],
+             $this->status_conflict
+         );
+     }
 }
