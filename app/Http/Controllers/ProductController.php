@@ -19,10 +19,11 @@ class ProductController extends Controller
         ]);
 
         if (Product::where('product_name', $request->input('product_name'))->exists()) {
-            return response()->json([
-                'message' => 'Product already exists',
-                'status' => 'fail'
-            ], 401);
+            // return response()->json([
+            //     'message' => 'Product already exists',
+            //     'status' => 'fail'
+            // ], 401);
+        return $this->sendConflictResponse(__('Product already exists'));
         }
 
         $product = new Product();
@@ -31,7 +32,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return $this->sendSuccessResponse(__('response.success'), $product);
+        return $this->sendSuccessResponse(__('Success'), $product);
     }
 
     public function get(Request $request)

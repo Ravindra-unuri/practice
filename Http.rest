@@ -71,7 +71,7 @@ POST {{react_base_url}}/product/create HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"Goa",
+    "product_name":"Gooaa",
     "product_price":50.25
 }
 
@@ -104,7 +104,7 @@ POST {{react_base_url}}/product/update/12 HTTP/1.1
 ###
 
 # @name deleteProduct
-POST {{react_base_url}}/product/delete/1 HTTP/1.1
+POST {{react_base_url}}/product/delete/10 HTTP/1.1
 {{auth_header}}
 
 ###
