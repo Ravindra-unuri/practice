@@ -92,6 +92,12 @@ POST {{react_base_url}}/product/detail/5 HTTP/1.1
 
 ###
 
+# @name productfind
+POST {{react_base_url}}/product/find/90 HTTP/1.1
+{{auth_header}}
+
+###
+
 # @name updateProduct
 POST {{react_base_url}}/product/update/12 HTTP/1.1
 {{auth_header}}

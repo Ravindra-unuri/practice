@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -32,7 +34,6 @@ class ProductController extends Controller
 
         $product->save();
 
-        return $this->sendSuccessResponse(__('Success'), $product);
     }
 
     public function get(Request $request)
@@ -75,6 +76,18 @@ class ProductController extends Controller
                 'status' => 'error',
                 'message' => 'Product not found'
             ], 404);
+        }
+    }
+
+    public function find($id)
+    {
+        try {
+            $product = Product::findOrFail($id);
+            return $this->sendSuccessResponse(__('Success'), $product);
+            
+        } catch (ModelNotFoundException $exception) {
+            Log::error('Product with ID '.$id.' not found in the database.');
+            return $exception;
         }
     }
 
