@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth:user']], function () {
         Route::post('/create', [ProductController::class, 'create']);
         Route::post('/get', [ProductController::class, 'get']);
         Route::post('/detail/{id}', [ProductController::class, 'detail']);
+        Route::post('/find/{id}', [ProductController::class, 'find']);
         Route::post('/update/{id}', [ProductController::class, 'update']);
         Route::post('/delete/{id}', [ProductController::class, 'delete']);
     });
