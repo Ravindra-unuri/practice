@@ -79,6 +79,12 @@ class ProductController extends Controller
         }
     }
 
+    public function explicitFind($product){
+        return response([
+            'data'=>$product
+        ]);
+    }
+
     public function find($id)
     {
         try {

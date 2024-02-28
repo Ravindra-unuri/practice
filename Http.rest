@@ -98,6 +98,12 @@ POST {{react_base_url}}/product/find/90 HTTP/1.1
 
 ###
 
+# @name explicitFind
+POST {{react_base_url}}/product/explicitFind/5 HTTP/1.1
+{{auth_header}}
+
+###
+
 # @name updateProduct
 POST {{react_base_url}}/product/update/12 HTTP/1.1
 {{auth_header}}
