@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Traits\ResponseTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    use ResponseTrait;
+    
     public function makeOrder(Request $request)
     {
         order::create([
@@ -96,10 +99,8 @@ class OrderController extends Controller
         ]);
 
         if ($updated > 0) {
-            return response([
-                'status' => 'success',
-                'message' => 'Order updated successfully'
-            ]);
+            return $this->sendSuccessResponse(__('Product Updated Successfully'));
+
         } else {
             return response([
                 'status' => 'failed',
