@@ -25,7 +25,7 @@ class ProductController extends Controller
             //     'message' => 'Product already exists',
             //     'status' => 'fail'
             // ], 401);
-        return $this->sendConflictResponse(__('Product already exists'));
+            return $this->sendConflictResponse(__('Product already exists'));
         }
 
         $product = new Product();
@@ -33,7 +33,6 @@ class ProductController extends Controller
         $product->product_price = $request->input('product_price');
 
         $product->save();
-
     }
 
     public function get(Request $request)
@@ -46,7 +45,7 @@ class ProductController extends Controller
         } else {
             $data = Product::paginate(3);
         }
-        $arr=$data->toJson();
+        $arr = $data->toJson();
 
         if ($data->isNotEmpty()) {
             return response()->json([
@@ -65,12 +64,12 @@ class ProductController extends Controller
     {
         $data = DB::table('products')
             ->where('products.id', $id)
-            ->first();
+            ->get();
 
-        if ($data != null) {
+        if ($data->isNotEmpty()) {
             return response()->json([
                 'status' => 'success',
-                'data' => $data
+                'data' => $data->toArray()
             ], 200);
         } else {
             return response()->json([
@@ -80,9 +79,10 @@ class ProductController extends Controller
         }
     }
 
-    public function explicitFind($product){
+    public function explicitFind($product)
+    {
         return response([
-            'data'=>$product
+            'data' => $product
         ]);
     }
 
@@ -91,9 +91,8 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
             return $this->sendSuccessResponse(__('Success'), $product);
-            
         } catch (ModelNotFoundException $exception) {
-            Log::error('Product with ID '.$id.' not found in the database.');
+            Log::error('Product with ID ' . $id . ' not found in the database.');
             return $exception;
         }
     }
