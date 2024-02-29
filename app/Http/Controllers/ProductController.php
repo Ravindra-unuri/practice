@@ -42,11 +42,12 @@ class ProductController extends Controller
         } else {
             $data = Product::paginate(3);
         }
+        $arr=$data->toJson();
 
         if ($data->isNotEmpty()) {
             return response()->json([
                 'status' => 'success',
-                'data' => $data,
+                'data' => $arr,
             ], 200);
         } else {
             return response()->json([
