@@ -21,7 +21,11 @@ class ProductController extends Controller
         ]);
 
         if (Product::where('product_name', $request->input('product_name'))->exists()) {
-            return $this->sendConflictResponse(__('Product already exists'));
+            // return response()->json([
+            //     'message' => 'Product already exists',
+            //     'status' => 'fail'
+            // ], 401);
+        return $this->sendConflictResponse(__('Product already exists'));
         }
 
         $product = new Product();
