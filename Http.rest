@@ -93,7 +93,7 @@ POST {{react_base_url}}/product/detail/5 HTTP/1.1
 ###
 
 # @name productfind
-POST {{react_base_url}}/product/find/90 HTTP/1.1
+POST {{react_base_url}}/product/find/5 HTTP/1.1
 {{auth_header}}
 
 ###
@@ -127,8 +127,8 @@ POST {{react_base_url}}/order/makeOrder HTTP/1.1
 
 {
     "order_name":"BookOrder",
-    "customer_id":1,
-    "product_id":2
+    "customer_id":23,
+    "product_id":6
 }
 ### 
 
@@ -147,12 +147,12 @@ POST {{react_base_url}}/order/detail/4 HTTP/1.1
 ###
 
 # @name updateOrder
-POST {{react_base_url}}/order/update/2 HTTP/1.1
+POST {{react_base_url}}/order/update/8 HTTP/1.1
 {{auth_header}}
 
 {
-    "order_name":"MarkerOrde",
-    "customer_id":1,
+    "order_name":"MarkerOrder",
+    "customer_id":28,
     "product_id":8
 }
 ### 
