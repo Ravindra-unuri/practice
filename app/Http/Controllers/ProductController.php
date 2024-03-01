@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\product;
 use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
@@ -13,13 +14,9 @@ class ProductController extends Controller
 {
     use ResponseTrait;
 
-    public function create(Request $request)
+    public function create(ProductRequest $request)
     {
-        $request->validate([
-            'product_name' => 'required|string',
-            'product_price' => 'required|numeric',
-        ]);
-
+       
         if (Product::where('product_name', $request->input('product_name'))->exists()) {
             // return response()->json([
             //     'message' => 'Product already exists',
