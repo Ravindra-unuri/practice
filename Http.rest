@@ -110,7 +110,7 @@ POST {{react_base_url}}/product/update/12 HTTP/1.1
 
 {
     "product_name":"sticker",
-    "product_price":25.00
+    "product_price":
 }
 
 ###

@@ -94,7 +94,7 @@ class ProductController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         if (product::where('product_name', $request->input('product_name'))->first()) {
             return response([
