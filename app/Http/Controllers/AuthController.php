@@ -176,6 +176,8 @@ class AuthController extends Controller
     public function profile()
     {
         $data = auth()->user();
+        $data->makeVisible('password');
+        $data->makeHidden('email');
         return response([
             'messsage' => 'Profile',
             'status' => 'success',
