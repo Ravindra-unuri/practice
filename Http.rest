@@ -162,3 +162,9 @@ POST {{react_base_url}}/order/delete/6 HTTP/1.1
 {{auth_header}}
 
 ### 
+
+# @name demo
+POST {{react_base_url}}/product/getProduct HTTP/1.1
+{{auth_header}}
+
+### 

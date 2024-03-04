@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\QueryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:user']], function () {
         Route::post('/explicitFind/{product}', [ProductController::class, 'explicitFind']);
         Route::post('/update/{id}', [ProductController::class, 'update']);
         Route::post('/delete/{id}', [ProductController::class, 'delete']);
+        Route::post('/getProduct', [QueryController::class, 'getProduct']);
     });
 
     Route::group(['prefix' => '/order'], function () {
