@@ -19,6 +19,14 @@ class order extends Model
         return $this->belongsToMany(product::class);
     }
 
+    // public function setOrderNameAttribute($value){
+    //     return strtoupper($value);
+    // }
+    public function setOrderNameAttribute($value)
+    {
+        $this->attributes['order_name'] = strtoupper($value);
+    }
+
     protected $fillable = [
         'id',
         'order_name',

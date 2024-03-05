@@ -10,6 +10,7 @@ class OrderController extends Controller
 {
     public function makeOrder(Request $request)
     {
+        // dd($request->input());
         order::create([
             'order_name' => $request->input('order_name'),
             'customer_id' => $request->input('customer_id'),
