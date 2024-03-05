@@ -147,13 +147,13 @@ POST {{react_base_url}}/order/detail/11 HTTP/1.1
 ###
 
 # @name updateOrder
-POST {{react_base_url}}/order/update/8 HTTP/1.1
+POST {{react_base_url}}/order/update/11 HTTP/1.1
 {{auth_header}}
 
 {
     "order_name":"MarkerOrder",
-    "customer_id":28,
-    "product_id":8
+    "customer_id":2,
+    "product_id":2
 }
 ### 
 
