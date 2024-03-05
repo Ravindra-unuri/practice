@@ -1,7 +1,7 @@
 @host = http://127.0.0.1:8000
 @react_base_url = {{host}}/api
 @public_header = Content-Type: applicatio/json\r\nAccept: application/json\r\nAccept-Language: en
-@auth_header = Content-Type: application/json\r\nAccept: application/json\r\nAccept-Language: en\r\nAuthorization: Bearer 6|FJRoIAtiHazAFtjsCDaUXHqDy9qWWbSx8So9mbob16644f91
+@auth_header = Content-Type: application/json\r\nAccept: application/json\r\nAccept-Language: en\r\nAuthorization: Bearer 8|wOiURJFkFwYKdf8YldHes3hXSx4fH8UA1V71J3tp27b4ae7b
 #-------PING------------#
 ###
 
@@ -46,10 +46,10 @@ POST {{react_base_url}}/logout HTTP/1.1
 
 # @name get
 POST {{react_base_url}}/get HTTP/1.1
-{{public_header}}
+{{auth_header}}
 
 {
-    "name":""
+    "name":"r"
 }
 ###
 
