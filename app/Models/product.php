@@ -33,6 +33,11 @@ class product extends Model
         return strtoupper($value);
     }
 
+    public function getProductPriceAttribute($value)
+    {
+        return intval($value);
+    }
+
     public function orders()
     {
         return $this->belongsToMany(order::class);

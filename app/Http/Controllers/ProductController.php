@@ -16,7 +16,7 @@ class ProductController extends Controller
 
     public function create(ProductRequest $request)
     {
-       
+
         if (Product::where('product_name', $request->input('product_name'))->exists()) {
             // return response()->json([
             //     'message' => 'Product already exists',
@@ -59,8 +59,11 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $data = DB::table('products')
-            ->where('products.id', $id)
+        // $data = DB::table('products')
+        //     ->where('products.id', $id)
+        //     ->get();
+
+        $data = product::where('products.id', $id)
             ->get();
 
         if ($data->isNotEmpty()) {
