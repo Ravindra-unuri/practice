@@ -126,9 +126,9 @@ POST {{react_base_url}}/order/makeOrder HTTP/1.1
 {{auth_header}}
 
 {
-    "order_name":"BookOrder",
-    "customer_id":23,
-    "product_id":6
+    "order_name":"penrcascsd",
+    "customer_id":2,
+    "product_id":2
 }
 ### 
 
@@ -142,7 +142,7 @@ POST {{react_base_url}}/order/get HTTP/1.1
 ###
 
 # @name orderDetail
-POST {{react_base_url}}/order/detail/4 HTTP/1.1
+POST {{react_base_url}}/order/detail/11 HTTP/1.1
 {{auth_header}}
 ###
 
