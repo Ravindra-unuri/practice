@@ -127,4 +127,22 @@ class OrderController extends Controller
             ]);
         }
     }
+    public function deete($id)
+    {
+        $order = order::find($id);
+
+        if (!$order) {
+            return response([
+                'status' => 'Not found',
+                'message' => 'Requested order not found'
+            ]);
+        } else {
+            order::where('id', $id)->delete();
+
+            return response([
+                'status' => 'success',
+                'message' => 'Requested order deleted successfully'
+            ]);
+        }
+    }
 }
