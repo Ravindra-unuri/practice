@@ -30,6 +30,7 @@ class ProductController extends Controller
         $product->product_price = $request->input('product_price');
 
         $product->save();
+        return $this->sendSuccessResponse(__('Product created successfully'),$product);
     }
 
     public function get(Request $request)

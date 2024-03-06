@@ -71,8 +71,8 @@ POST {{react_base_url}}/product/create HTTP/1.1
 {{auth_header}}
 
 {
-    "product_name":"",
-    "product_price":50.25
+    "product_name":"Spiral",
+    "product_price":70.70
 }
 
 ### 
@@ -105,7 +105,7 @@ POST {{react_base_url}}/product/explicitFind/5 HTTP/1.1
 ###
 
 # @name updateProduct
-POST {{react_base_url}}/product/update/12 HTTP/1.1
+POST {{react_base_url}}/product/update/17 HTTP/1.1
 {{auth_header}}
 
 {
@@ -116,7 +116,7 @@ POST {{react_base_url}}/product/update/12 HTTP/1.1
 ###
 
 # @name deleteProduct
-POST {{react_base_url}}/product/delete/10 HTTP/1.1
+POST {{react_base_url}}/product/delete/19 HTTP/1.1
 {{auth_header}}
 
 ###
