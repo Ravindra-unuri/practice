@@ -6,6 +6,7 @@ trait ResponseTrait
 {
     private $status_ok = 200;
     private $status_conflict = 409;
+    private $status_notfound=404;
 
 
     /**
@@ -48,6 +49,18 @@ trait ResponseTrait
                  'data' => $data ?? (object) [],
              ],
              $this->status_conflict
+         );
+     }
+
+     public function sendStatusNotFoundResponse($message, $data = null, $code = null)
+     {
+         return response(
+             [
+                 'code' => $code ?? $this->status_notfound,
+                 'message' => $message,
+                 'data' => $data ?? (object) [],
+             ],
+             $this->status_notfound
          );
      }
 }

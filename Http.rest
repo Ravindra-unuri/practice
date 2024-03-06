@@ -87,13 +87,13 @@ POST {{react_base_url}}/product/get HTTP/1.1
 ###
 
 # @name productDetail
-POST {{react_base_url}}/product/detail/5 HTTP/1.1
+POST {{react_base_url}}/product/detail/90 HTTP/1.1
 {{auth_header}}
 
 ###
 
 # @name productfind
-POST {{react_base_url}}/product/find/5 HTTP/1.1
+POST {{react_base_url}}/product/find/90 HTTP/1.1
 {{auth_header}}
 
 ###
