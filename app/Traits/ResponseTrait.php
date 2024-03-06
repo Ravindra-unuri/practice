@@ -6,7 +6,8 @@ trait ResponseTrait
 {
     private $status_ok = 200;
     private $status_conflict = 409;
-    private $status_notfound=404;
+    private $status_notfound = 404;
+    private $status_failed = 400;
 
 
     /**
@@ -18,7 +19,7 @@ trait ResponseTrait
      *
      * @returns \Illuminate\Http\JsonResponse
      */
-    
+
     public function sendSuccessResponse($message, $data = null, $code = null)
     {
         return response(
@@ -39,28 +40,40 @@ trait ResponseTrait
      * @param int (optional) $code
      *
      */
-    
-     public function sendConflictResponse($message, $data = null, $code = null)
-     {
-         return response(
-             [
-                 'code' => $code ?? $this->status_conflict,
-                 'message' => $message,
-                 'data' => $data ?? (object) [],
-             ],
-             $this->status_conflict
-         );
-     }
 
-     public function sendStatusNotFoundResponse($message, $data = null, $code = null)
-     {
-         return response(
-             [
-                 'code' => $code ?? $this->status_notfound,
-                 'message' => $message,
-                 'data' => $data ?? (object) [],
-             ],
-             $this->status_notfound
-         );
-     }
+    public function sendConflictResponse($message, $data = null, $code = null)
+    {
+        return response(
+            [
+                'code' => $code ?? $this->status_conflict,
+                'message' => $message,
+                'data' => $data ?? (object) [],
+            ],
+            $this->status_conflict
+        );
+    }
+
+    public function sendNotFoundResponse($message, $data = null, $code = null)
+    {
+        return response(
+            [
+                'code' => $code ?? $this->status_notfound,
+                'message' => $message,
+                'data' => $data ?? (object) [],
+            ],
+            $this->status_notfound
+        );
+    }
+
+    public function sendFailedResponse($message, $data = null, $code = null)
+    {
+        return response(
+            [
+                'code' => $code ?? $this->status_failed,
+                'message' => $message,
+                'data' => $data ?? (object) [],
+            ],
+            $this->status_failed
+        );
+    }
 }
