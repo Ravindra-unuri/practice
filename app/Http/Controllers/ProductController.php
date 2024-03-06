@@ -30,7 +30,7 @@ class ProductController extends Controller
         $product->product_price = $request->input('product_price');
 
         $product->save();
-        return $this->sendSuccessResponse(__('Product created successfully'),$product);
+        return $this->sendSuccessResponse(__('Product created successfully'), $product);
     }
 
     public function get(Request $request)
@@ -46,42 +46,30 @@ class ProductController extends Controller
         $arr = $data->toJson();
 
         if ($data->isNotEmpty()) {
-            return response()->json([
-                'status' => 'success',
-                'data' => $arr,
-            ], 200);
+            return $this->sendSuccessResponse(__('success'), $arr);
         } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No products found'
-            ], 404);
+            return $this->sendNotFoundResponse(__('Product not found'));
         }
     }
 
     public function detail($id)
     {
-        // $data = DB::table('products')
-        //     ->where('products.id', $id)
-        //     ->get();
-
         $data = product::where('products.id', $id)
             ->get();
 
         if ($data->isNotEmpty()) {
             return response()->json([
-                'status' => 'success',
+                '' => 'success',
                 'data' => $data->toArray()
             ], 200);
         } else {
-            return $this->sendStatusNotFoundResponse(__('Product not found'));
+            return $this->sendNotFoundResponse(__('Product not found'));
         }
     }
 
     public function explicitFind($product)
     {
-        return response([
-            'data' => $product
-        ]);
+        return $this->sendSuccessResponse(__('success'), $product);
     }
 
     public function find($id)
@@ -109,15 +97,9 @@ class ProductController extends Controller
             ]);
 
             if ($affectedRows > 0) {
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Product updated successfully'
-                ], 200);
+                return $this->sendSuccessResponse(__('Product updated successfully'));
             } else {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Failed to update product or no changes made'
-                ], 400);
+                return $this->sendFailedResponse(__('Failed to update product or no changes made'));
             }
         }
     }
@@ -126,16 +108,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if (!$product) {
-            return response()->json([
-                'status' => 'Not found',
-                'message' => 'Requested product does not exist'
-            ], 404);
+            return $this->sendNotFoundResponse(__('Product not found'));
         } else {
             $product->delete();
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Product deleted successfully'
-            ], 200);
+            return $this->sendSuccessResponse(__('Product deleted successfully'));
         }
     }
 }
