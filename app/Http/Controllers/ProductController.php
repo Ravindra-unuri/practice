@@ -73,10 +73,7 @@ class ProductController extends Controller
                 'data' => $data->toArray()
             ], 200);
         } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Product not found'
-            ], 404);
+            return $this->sendStatusNotFoundResponse(__('Product not found'));
         }
     }
 
